@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Adaptive Learning Tutor</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" type="image/svg+xml" href="/static/favicon.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
+    <link rel="stylesheet" href="styles.css">
+    <!-- Marked.js for Markdown rendering -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body class="light-mode">
+    <!-- Mobile Menu Button -->
+    <button class="mobile-menu-btn" onclick="toggleSidebar()">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <span class="logo-icon">🎓</span>
+            <h1>AI Learning Tutor</h1>
+        </div>
+
+        <nav class="nav-menu">
+            <a href="#" class="nav-item active" data-page="home">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </a>
+            <a href="#" class="nav-item" data-page="learn">
+                <i class="fas fa-book"></i>
+                <span>Learn</span>
+            </a>
+            <a href="#" class="nav-item" data-page="quiz">
+                <i class="fas fa-question-circle"></i>
+                <span>Quiz</span>
+            </a>
+            <a href="#" class="nav-item" data-page="video">
+                <i class="fas fa-video"></i>
+                <span>Video Generator</span>
+            </a>
+            <a href="#" class="nav-item" data-page="settings">
+                <i class="fas fa-cog"></i>
+                <span>Settings</span>
+            </a>
+        </nav>
+
+        <div class="theme-toggle">
+            <span>Theme</span>
+            <button id="theme-btn" class="theme-btn">
+                <i class="fas fa-sun"></i>
+                <i class="fas fa-moon"></i>
+                <span class="toggle-ball"></span>
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Home Page -->
+        <section id="page-home" class="page active">
+            <div class="hero">
+                <h1 class="gradient-text">Welcome to AI Adaptive Learning Tutor</h1>
+                <div class="hero-underline"></div>
+                <p class="hero-subtitle">
+                    Personalized AI-powered education that adapts to your learning style and pace
+                </p>
+                <button class="btn btn-primary btn-lg" onclick="navigateTo('learn')">
+                    Get Started <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon blue">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>AI Tutor</h3>
+                    <p>Ask questions and get detailed, context-aware explanations powered by GPT-4</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon purple">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3>RAG Knowledge Base</h3>
+                    <p>System uses advanced context understanding for personalized answers</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon orange">
+                        <i class="fas fa-film"></i>
+                    </div>
+                    <h3>Video Generation</h3>
+                    <p>Auto-generate educational videos with animations and voice narration</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon green">
+                        <i class="fas fa-clipboard-check"></i>
+                    </div>
+                    <h3>Adaptive Quizzes</h3>
+                    <p>Test your understanding with AI-generated quizzes that adapt to your level</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Learn Page -->
+        <section id="page-learn" class="page">
+            <h1 class="page-title"><i class="fas fa-book"></i> AI Tutor</h1>
+
+            <div class="learn-container">
+                <div class="sidebar-panel">
+                    <div class="panel-section">
+                        <label>Subject</label>
+                        <select id="subject-select" class="form-select">
+                            <option value="Mathematics">Mathematics</option>
+                            <option value="Physics">Physics</option>
+                            <option value="Computer Science">Computer Science</option>
+                            <option value="Biology">Biology</option>
+                            <option value="Chemistry">Chemistry</option>
+                        </select>
+                    </div>
+
+                    <div class="panel-section">
+                        <label>Topic</label>
+                        <select id="topic-select" class="form-select">
+                            <option value="Quadratic Equations">Quadratic Equations</option>
+                            <option value="Linear Algebra">Linear Algebra</option>
+                            <option value="Calculus">Calculus</option>
+                        </select>
+                    </div>
+
+                    <div class="panel-section">
+                        <label>Help Mode</label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="help-mode" value="ai" checked>
+                                <span class="radio-custom"></span>
+                                AI Tutor (full answer)
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="help-mode" value="resources">
+                                <span class="radio-custom"></span>
+                                Resource-first (save credits)
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="panel-section">
+                        <label class="mas-toggle-label">
+                            <input type="checkbox" id="mas-mode-toggle" class="mas-checkbox">
+                            <span class="mas-slider"></span>
+                            <span class="mas-label-text">
+                                <i class="fas fa-network-wired"></i> Multi-Agent Mode
+                            </span>
+                        </label>
+                        <p class="mas-description">Uses 3 specialized AI agents for comprehensive learning</p>
+                    </div>
+                </div>
+
+                <div class="chat-container">
+                    <div class="chat-header">
+                        <h3>Chat with AI Tutor</h3>
+                        <button class="btn btn-outline btn-sm" onclick="clearChat()">
+                            <i class="fas fa-trash"></i> Clear
+                        </button>
+                    </div>
+
+                    <div class="chat-messages" id="chat-messages">
+                        <div class="message assistant">
+                            <div class="message-avatar">
+                                <i class="fas fa-robot"></i>
+                            </div>
+                            <div class="message-content">
+                                <p>Hello! I'm your AI tutor. Ask me anything about the selected topic, or upload your
+                                    study materials for personalized help.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="chat-input-container">
+                        <input type="text" id="chat-input" class="chat-input" placeholder="Ask the AI tutor..."
+                            onkeypress="handleKeyPress(event)">
+                        <button class="btn btn-primary btn-icon" onclick="sendMessage()">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quiz Page -->
+        <section id="page-quiz" class="page">
+            <h1 class="page-title"><i class="fas fa-question-circle"></i> Adaptive Quiz</h1>
+
+            <div class="quiz-container">
+                <div class="quiz-settings">
+                    <div class="form-group">
+                        <label>Topic</label>
+                        <input type="text" class="form-input" id="quiz-topic" value="Python Basics">
+                    </div>
+                    <div class="form-group">
+                        <label>Difficulty</label>
+                        <select class="form-select" id="quiz-difficulty">
+                            <option value="beginner">Beginner</option>
+                            <option value="intermediate">Intermediate</option>
+                            <option value="advanced">Advanced</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Number of Questions</label>
+                        <input type="number" class="form-input" id="quiz-count" value="3" min="1" max="10">
+                    </div>
+                    <button class="btn btn-primary btn-block" onclick="generateQuiz()">
+                        <i class="fas fa-magic"></i> Generate Quiz
+                    </button>
+                </div>
+
+                <div class="quiz-content" id="quiz-content">
+                    <div class="empty-state">
+                        <i class="fas fa-clipboard-list"></i>
+                        <p>Click "Generate Quiz" to create a personalized quiz</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Video Generator Page -->
+        <section id="page-video" class="page">
+            <h1 class="page-title"><i class="fas fa-video"></i> Educational Video Generator</h1>
+
+            <div class="video-container">
+                <div class="video-settings">
+                    <p class="info-text"
+                        style="background: linear-gradient(135deg, rgba(189, 147, 249, 0.15), rgba(255, 121, 198, 0.15)); border-left: 3px solid #bd93f9; padding: 0.75rem; font-size: 0.9rem;">
+                        <i class="fas fa-magic"></i>
+                        <strong>Professional Mode:</strong> Creates 3Blue1Brown-style videos with smooth Manim
+                        animations and natural AI voice narration.
+                    </p>
+
+                    <div class="form-group">
+                        <label>Topic</label>
+                        <input type="text" class="form-input" id="video-topic" value="Binary Search Tree">
+                    </div>
+                    <div class="form-group">
+                        <label>Subject</label>
+                        <select class="form-select" id="video-subject">
+                            <option value="Computer Science">Computer Science</option>
+                            <option value="Mathematics">Mathematics</option>
+                            <option value="Physics">Physics</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Difficulty</label>
+                        <select class="form-select" id="video-difficulty">
+                            <option value="beginner">Beginner</option>
+                            <option value="intermediate">Intermediate</option>
+                            <option value="advanced">Advanced</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-microphone"></i> AI Voice (Natural Speech)</label>
+                        <select class="form-select" id="video-voice">
+                            <option value="nova" selected>Nova (Warm Teacher)</option>
+                            <option value="shimmer">Shimmer (Clear & Friendly)</option>
+                            <option value="alloy">Alloy (Balanced)</option>
+                            <option value="echo">Echo (Deep & Calm)</option>
+                            <option value="onyx">Onyx (Authoritative)</option>
+                            <option value="fable">Fable (Expressive)</option>
+                        </select>
+                        <small style="color: var(--text-secondary); display: block; margin-top: 0.25rem;">Powered by
+                            OpenAI TTS - sounds like a real teacher</small>
+                    </div>
+                    <div class="form-group">
+                        <label>Duration (minutes)</label>
+                        <input type="range" id="video-duration" min="1" max="10" value="3" class="form-range">
+                        <span id="duration-value">3 min</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="mas-toggle-label">
+                            <input type="checkbox" id="pro-mode-toggle" class="mas-checkbox" checked>
+                            <span class="mas-slider"></span>
+                            <span class="mas-label-text">
+                                <i class="fas fa-crown" style="color: #ffd700;"></i> Professional Mode
+                            </span>
+                        </label>
+                        <p class="mas-description">Manim animations + Natural AI voice (recommended)</p>
+                    </div>
+
+                    <button class="btn btn-primary btn-block" onclick="generateVideo()"
+                        style="background: linear-gradient(135deg, #bd93f9, #ff79c6); margin-bottom: 0.75rem;">
+                        <i class="fas fa-film"></i> Generate Video
+                    </button>
+
+                    <button class="btn btn-outline btn-block" onclick="generate3B1BPackage()"
+                        style="border-color: #bd93f9; color: #bd93f9;">
+                        <i class="fas fa-book-open"></i> Complete 3B1B Package (4 Sections)
+                    </button>
+                    <small
+                        style="color: var(--text-secondary); display: block; text-align: center; margin-top: 0.5rem;">
+                        Generates: Script + Storyboard + Manim Code + Voice Prompt
+                    </small>
+                </div>
+
+                <div class="video-preview" id="video-preview">
+                    <div class="empty-state">
+                        <i class="fas fa-play-circle"></i>
+                        <p>Your generated video will appear here</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Settings Page -->
+        <section id="page-settings" class="page">
+            <h1 class="page-title"><i class="fas fa-cog"></i> Settings</h1>
+
+            <div class="settings-container">
+                <div class="settings-card">
+                    <h3>System Status</h3>
+                    <div class="status-list">
+                        <div class="status-item" id="status-api">
+                            <i class="fas fa-circle"></i>
+                            <span>OpenAI API</span>
+                            <span class="status-badge">Checking...</span>
+                        </div>
+                        <div class="status-item" id="status-rag">
+                            <i class="fas fa-circle"></i>
+                            <span>RAG System</span>
+                            <span class="status-badge">Checking...</span>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-outline btn-block" onclick="initializeSampleContent()">
+                        <i class="fas fa-database"></i> Initialize Sample Content
+                    </button>
+                </div>
+
+                <div class="settings-card">
+                    <h3>API Usage Info</h3>
+                    <p>Your OpenAI API key is configured. The following features use API credits:</p>
+                    <ul class="usage-list">
+                        <li><strong>AI Tutor:</strong> ~$0.0003 per question</li>
+                        <li><strong>Quiz Generation:</strong> ~$0.0002 per question</li>
+                        <li><strong>Video Scripts:</strong> ~$0.0006 per video</li>
+                    </ul>
+                    <p class="tip"><i class="fas fa-lightbulb"></i> Use "Resource-first" mode for CS topics to save
+                        credits!</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Loading Overlay with Animated Cartoon -->
+    <div class="loading-overlay" id="loading-overlay">
+        <div class="loading-content">
+            <div class="loading-mascot">
+                <div class="mascot-body">
+                    <div class="mascot-face">
+                        <div class="mascot-eyes">
+                            <div class="eye left"></div>
+                            <div class="eye right"></div>
+                        </div>
+                        <div class="mascot-mouth"></div>
+                    </div>
+                    <div class="mascot-book">
+                        <div class="book-page"></div>
+                        <div class="book-page"></div>
+                        <div class="book-page"></div>
+                    </div>
+                </div>
+                <div class="mascot-shadow"></div>
+            </div>
+            <div class="loading-text">
+                <div class="loading-dots">
+                    <span>Loading</span>
+                    <span class="dot">.</span>
+                    <span class="dot">.</span>
+                    <span class="dot">.</span>
+                </div>
+            </div>
+            <p class="loading-fact" id="loading-fact">🧠 The human brain can process images in just 13 milliseconds!</p>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>

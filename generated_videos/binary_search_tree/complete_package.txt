@@ -1,0 +1,128 @@
+
+========================
+SECTION 1: VOICEOVER SCRIPT
+========================
+[START]
+
+Hey there! [PAUSE] Today, let's explore something called a *Binary Search Tree*. [PAUSE]
+
+Imagine you're organizing books on a shelf. [PAUSE] You want to find a book quickly. [PAUSE] A Binary Search Tree is like a special shelf that helps you do that. [PAUSE]
+
+Picture a tree. [PAUSE] Not the leafy kind, but an upside-down one with branches spreading downwards. [PAUSE] At the top, we have the *root*. [PAUSE] Each node or book in our tree has at most two branches. [PAUSE] One on the left and one on the right. [PAUSE]
+
+Here's the *magic*: every node follows a rule. [EMPHASIS] Everything in the left branch is smaller, and everything in the right is larger. [PAUSE] This is what makes searching fast. [PAUSE]
+
+Want to find a number? Start at the root. [PAUSE] Compare it with the number you're looking for. [PAUSE] If it's smaller, go left. If larger, go right. [PAUSE] Repeat this. [PAUSE] Just like that, you're zooming down the tree! [PAUSE]
+
+Binary Search Trees are clever. [PAUSE] Balancing them keeps the tree from becoming a long, single branch. [PAUSE] Keeping it balanced means searching stays quick. [PAUSE]
+
+Isn't it fascinating? [PAUSE] A simple rule with big implications. [PAUSE] That's the beauty of Binary Search Trees. [PAUSE]
+
+[END]
+
+========================
+SECTION 2: ANIMATION STORYBOARD
+========================
+**Scene 1:** 
+- A blank dark blue screen. A single brown book appears at the center. 
+- The book transforms into a tree node (a white circle), with "Root" written inside.
+- Arrows extend from the node, one to the left, one to the right, showing potential paths.
+- This sets up the concept of a root node with branches.
+
+**Scene 2:**
+- More nodes appear, forming a small tree structure.
+- Nodes on the left have smaller numbers, e.g., 3 and 5, and on the right, larger numbers, e.g., 20 and 25.
+- Each node is connected with lines to emphasize the hierarchical structure.
+- This demonstrates the rule of how numbers are organized in the tree.
+
+**Scene 3:**
+- A highlighted path animation plays from the root to a specific number, e.g., 20.
+- The path glows in yellow as it moves left or right, based on comparisons.
+- This visualization shows how searching operates within the tree.
+
+**Scene 4:**
+- The tree tilts slightly to one side, showing an unbalanced state.
+- Arrows and animation show rebalancing, with nodes shifting to a more central position.
+- The tree stands upright again, symbolizing balance and efficient searching.
+- This final scene illustrates the importance of keeping the tree balanced.
+
+========================
+SECTION 3: MANIM CODE
+========================
+from manim import *
+
+class BinarySearchTree(Scene):
+    def construct(self):
+        self.camera.background_color = "#1e1e2e"
+        
+        # Scene 1: Root Node
+        root_node = Circle(color=WHITE).move_to(UP*2)
+        root_text = MathTex("Root").move_to(root_node.get_center())
+        self.play(Create(root_node), Write(root_text))
+        self.wait()
+
+        left_arrow = Arrow(root_node.get_bottom(), root_node.get_bottom() + LEFT*2 + DOWN)
+        right_arrow = Arrow(root_node.get_bottom(), root_node.get_bottom() + RIGHT*2 + DOWN)
+        self.play(Create(left_arrow), Create(right_arrow))
+        self.wait()
+
+        # Scene 2: Tree Structure
+        left_node = Circle(color=WHITE).shift(LEFT*2 + DOWN)
+        left_value = MathTex("3").move_to(left_node.get_center())
+        right_node = Circle(color=WHITE).shift(RIGHT*2 + DOWN)
+        right_value = MathTex("20").move_to(right_node.get_center())
+
+        self.play(Create(left_node), Write(left_value), Create(right_node), Write(right_value))
+        self.wait()
+
+        left_child = Circle(color=WHITE).shift(LEFT*4 + DOWN*2)
+        left_child_value = MathTex("5").move_to(left_child.get_center())
+        right_child = Circle(color=WHITE).shift(RIGHT*4 + DOWN*2)
+        right_child_value = MathTex("25").move_to(right_child.get_center())
+
+        self.play(Create(left_child), Write(left_child_value), Create(right_child), Write(right_child_value))
+        self.wait()
+
+        self.play(Create(Line(root_node.get_center(), left_node.get_center())), 
+                  Create(Line(root_node.get_center(), right_node.get_center())))
+        self.wait()
+
+        # Scene 3: Highlighted Search Path
+        search_path = VGroup(Line(root_node.get_center(), right_node.get_center(), color=YELLOW),
+                             Line(right_node.get_center(), right_child.get_center(), color=YELLOW))
+        self.play(Create(search_path))
+        self.wait()
+
+        # Scene 4: Balancing Animation
+        self.play(left_child.animate.shift(RIGHT))
+        self.play(right_child.animate.shift(LEFT))
+        self.wait()
+
+========================
+SECTION 4: VOICE GENERATION PROMPT
+========================
+Voice style: 
+- Warm and curious
+- Calm, not rushed
+- Like explaining to a friend
+- Emphasize wonder and discovery
+
+Pacing instructions: 
+- Use [PAUSE] markers for natural pauses
+- Emphasize words marked with [EMPHASIS]
+
+Full voiceover script:
+
+Hey there! [PAUSE] Today, let's explore something called a *Binary Search Tree*. [PAUSE]
+
+Imagine you're organizing books on a shelf. [PAUSE] You want to find a book quickly. [PAUSE] A Binary Search Tree is like a special shelf that helps you do that. [PAUSE]
+
+Picture a tree. [PAUSE] Not the leafy kind, but an upside-down one with branches spreading downwards. [PAUSE] At the top, we have the *root*. [PAUSE] Each node or book in our tree has at most two branches. [PAUSE] One on the left and one on the right. [PAUSE]
+
+Here's the *magic*: every node follows a rule. [EMPHASIS] Everything in the left branch is smaller, and everything in the right is larger. [PAUSE] This is what makes searching fast. [PAUSE]
+
+Want to find a number? Start at the root. [PAUSE] Compare it with the number you're looking for. [PAUSE] If it's smaller, go left. If larger, go right. [PAUSE] Repeat this. [PAUSE] Just like that, you're zooming down the tree! [PAUSE]
+
+Binary Search Trees are clever. [PAUSE] Balancing them keeps the tree from becoming a long, single branch. [PAUSE] Keeping it balanced means searching stays quick. [PAUSE]
+
+Isn't it fascinating? [PAUSE] A simple rule with big implications. [PAUSE] That's the beauty of Binary Search Trees. [PAUSE]
